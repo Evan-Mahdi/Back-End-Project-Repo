@@ -7,16 +7,14 @@ import com.example.back_end_project_repo.services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/api")
 public class UserController {
     @Autowired
     private UserRepository userRepository;
@@ -40,5 +38,19 @@ public class UserController {
             return ResponseEntity.ok(Collections.singletonMap("message", "Login successful"));
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+    }
+
+    @GetMapping("/users")
+    public List<User> getAllUsers() {
+        return userService.getAllUsers();
+    }
+
+    @GetMapping("/users/{id}")
+    public Optional<User> getUserById(Long id) {
+        return userService.getUserById(id);
+    }
+    @GetMapping("/home")
+    public String home() {
+        return "Welcome to home page";
     }
 }
