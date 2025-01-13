@@ -33,11 +33,16 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody User user) {
-        Optional<User> foundUser = userRepository.findByEmail(user.getEmail());
-        if (foundUser.isPresent() && foundUser.get().getPassword().equals(user.getPassword())) {
-            return ResponseEntity.ok(Collections.singletonMap("message", "Login successful"));
+        if (userService.authenticateUser(user.getEmail(), user.getPassword())) {
+            return ResponseEntity.ok(Collections.singletonMap("message", "login successfully"));
         }
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid Credential");
+    }
+
+    @PutMapping("/users/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) {
+        User updatedUser = userService.update(id, user);
+        return ResponseEntity.ok(updatedUser);
     }
 
     @GetMapping("/users")
@@ -49,6 +54,7 @@ public class UserController {
     public Optional<User> getUserById(Long id) {
         return userService.getUserById(id);
     }
+
     @GetMapping("/home")
     public String home() {
         return "Welcome to home page";
