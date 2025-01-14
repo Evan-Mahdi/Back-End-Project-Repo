@@ -1,11 +1,6 @@
 package com.example.back_end_project_repo.models;
 
-import org.hibernate.annotations.Table;
-import org.springframework.data.annotation.Id;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "events")
