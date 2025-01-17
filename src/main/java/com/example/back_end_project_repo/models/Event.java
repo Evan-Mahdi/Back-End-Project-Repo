@@ -2,6 +2,8 @@ package com.example.back_end_project_repo.models;
 
 import jakarta.persistence.*;
 
+import java.util.Date;
+
 @Entity
 @Table(name = "events")
 public class Event {
@@ -13,7 +15,7 @@ public class Event {
     @Column
     private String description;
     @Column(nullable = false)
-    private String date;
+    private Date date;
     @Column
     private String time;
     @Column
@@ -44,11 +46,11 @@ public class Event {
         this.description = description;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
