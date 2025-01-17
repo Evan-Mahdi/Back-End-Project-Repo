@@ -25,8 +25,8 @@ public class BackEndProjectRepoApplication implements CommandLineRunner {
     @Override
     public void run(String... args) {
         try {
-//            eventServices.cleanUpEvebtTable();
-//            userServices.cleanUpUserTable();
+            eventServices.cleanUpEvebtTable();
+            userServices.cleanUpUserTable();
 
             // Load JSON files from classpath (assets folder in resources)
             ClassPathResource userResources = new ClassPathResource("users.json");
